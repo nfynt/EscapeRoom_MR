@@ -23,13 +23,18 @@ namespace Nfynt.Components
         public State currState = State.OFF;
         public Transform buttonObj;
         public float angleChange = 20f;
-        public AudioClip buttonPressClip;
 
         private AudioSource audSrc;
+        
+        private void Start()
+        {
+            audSrc = GetComponent<AudioSource>();
+            InitBehaviour();
+        }
 
         void InitBehaviour()
         {
-            if(currState==State.OFF)
+            if (currState == State.OFF)
             {
                 buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
             }
@@ -37,14 +42,8 @@ namespace Nfynt.Components
             {
                 buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
             }
-            audSrc.clip = buttonPressClip;
+            audSrc.Stop();
             audSrc.loop = false;
-        }
-
-        private void Start()
-        {
-            audSrc = GetComponent<AudioSource>();
-            InitBehaviour();
         }
 
         public void ToggleSwitchState()
@@ -54,15 +53,16 @@ namespace Nfynt.Components
                 currState = State.ON;
                 buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
                 SwitchState.Invoke(true);
-                audSrc.Play();
-
+                //audSrc.Play();
+                AudioManager.Instance.PlayClip(AudioManager.ClipType.HEAVY_BUTTON_CLICK, audSrc, 0.5f);
             }
             else
             {
                 currState = State.OFF;
                 buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
                 SwitchState.Invoke(false);
-                audSrc.Play();
+                //audSrc.Play();
+                AudioManager.Instance.PlayClip(AudioManager.ClipType.HEAVY_BUTTON_CLICK, audSrc, 0.5f);
             }
         }
     }

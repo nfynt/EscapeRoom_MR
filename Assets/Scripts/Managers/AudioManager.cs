@@ -11,7 +11,8 @@ namespace Nfynt
         public enum ClipType
         {
             UI_BUTTON_CLICK,
-            TORCH_BUTTON_CLICK
+            TORCH_BUTTON_CLICK,
+            HEAVY_BUTTON_CLICK
         }
 
         [Header("Ambient Clips")]
