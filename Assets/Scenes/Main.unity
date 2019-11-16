@@ -2432,7 +2432,7 @@ MonoBehaviour:
   homeClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
   mainClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
   clickClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
-  torchButtonClip: {fileID: 0}
+  torchButtonClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
 --- !u!82 &881974919
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2443,7 +2443,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
