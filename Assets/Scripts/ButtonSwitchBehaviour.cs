@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nfynt.Components
+namespace Nfynt.Behaviours
 {
     [RequireComponent(typeof(AudioSource))]
     public class ButtonSwitchBehaviour : MonoBehaviour
@@ -67,14 +67,3 @@ namespace Nfynt.Components
         }
     }
 }
-
-
-
-
-/*
- __  _ _____   ____  _ _____  
-|  \| | __\ `v' /  \| |_   _| 
-| | ' | _| `. .'| | ' | | |   
-|_|\__|_|   !_! |_|\__| |_|
- 
-*/

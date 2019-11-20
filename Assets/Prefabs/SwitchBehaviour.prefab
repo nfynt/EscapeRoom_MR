@@ -132,12 +132,12 @@ MonoBehaviour:
   _allowMultiGrasp: 0
   _moveObjectWhenGrasped: 0
   graspedMovementType: 0
-  _overrideInteractionLayer: 1
+  _overrideInteractionLayer: 0
   _interactionLayer:
-    layerIndex: 9
-  _overrideNoContactLayer: 1
+    layerIndex: 0
+  _overrideNoContactLayer: 0
   _noContactLayer:
-    layerIndex: 10
+    layerIndex: 0
   _eventTable:
     _entries:
     - enumValue: 170
