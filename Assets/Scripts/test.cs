@@ -50,13 +50,19 @@ public class test : MonoBehaviour
             //Quaternion look = Quaternion.LookRotation(tar - transform.position, transform.up);
             //transform.rotation = look;
             //transform.rotation = Quaternion.EulerAngles(new Vector3(transform.rotation.eulerAngles.x, 0f, 0f));
-            float rad = dir.magnitude;
-            Debug.Log(rad);
-            Debug.Log(tar);
-            float phi = Mathf.Acos(dir.z / rad);
-            float theta = Mathf.Acos(dir.x / (rad * Mathf.Sin(phi)));
-            Debug.Log(phi.ToString() + "____" + theta.ToString());
-            transform.rotation = Quaternion.EulerAngles(new Vector3(360f - (phi*Mathf.Rad2Deg+theta*Mathf.Rad2Deg), 0f, 0f));
+            //float rad = dir.magnitude;
+            //Debug.Log(rad);
+            //Debug.Log(tar);
+            //float phi = Mathf.Acos(dir.z / rad);
+            //float theta = Mathf.Acos(dir.x / (rad * Mathf.Sin(phi)));
+            //Debug.Log(phi.ToString() + "____" + theta.ToString());
+            // transform.rotation = Quaternion.EulerAngles(new Vector3(360f - (phi*Mathf.Rad2Deg+theta*Mathf.Rad2Deg), 0f, 0f));
+
+            //transform.LookAt(tar, transform.right);
+            //Vector3 localRot = transform.localRotation.eulerAngles;
+            //Quaternion rot = Quaternion.Euler(localRot.x, 0f, 0f);
+            transform.rotation = Quaternion.LookRotation(tar);
+            //transform.localRotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime);
         }
     }
 
@@ -70,6 +76,6 @@ public class test : MonoBehaviour
         Gizmos.DrawLine(transform.position, tar);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.up * 2);
+        Gizmos.DrawLine(transform.position, transform.up);
     }
 }

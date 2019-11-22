@@ -12,7 +12,8 @@ namespace Nfynt
         {
             UI_BUTTON_CLICK,
             TORCH_BUTTON_CLICK,
-            HEAVY_BUTTON_CLICK
+            HEAVY_BUTTON_CLICK,
+            PS_LEVER_STATE
         }
 
         [Header("Ambient Clips")]
@@ -24,6 +25,8 @@ namespace Nfynt
         [Header("SFX Clips")]
         public AudioClip clickClip;
         public AudioClip torchButtonClip;
+        public AudioClip heavyButtonClip;
+        public AudioClip powerSupplyLevelClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -68,6 +71,13 @@ namespace Nfynt
                     audioSrc.clip = clickClip;
                     break;
                 case ClipType.TORCH_BUTTON_CLICK:
+                    audioSrc.clip = torchButtonClip;
+                    break;
+                case ClipType.HEAVY_BUTTON_CLICK:
+                    audioSrc.clip = heavyButtonClip;
+                    break;
+                case ClipType.PS_LEVER_STATE:
+                    audioSrc.clip = powerSupplyLevelClip;
                     break;
             }
             audSrc.Play();
