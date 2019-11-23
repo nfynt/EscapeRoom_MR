@@ -31,9 +31,7 @@ namespace Nfynt.Components
 
         private void Start()
         {
-#if !UNITY_EDITOR
             currState = PSState.OFF;
-#endif
             currHandleRot = handle.localRotation.eulerAngles.z;
             if (tTool == null)
                 tTool = GetComponentInChildren<TransformTool>();
@@ -86,7 +84,8 @@ namespace Nfynt.Components
             }
 
             tTool.enabled = false;
-            audMgr.PlayClip(AudioManager.ClipType.PS_LEVER_STATE);
+            if (!skipAud)
+                audMgr.PlayClip(AudioManager.ClipType.PS_LEVER_STATE);
 
         }
 

@@ -13,7 +13,8 @@ namespace Nfynt
             UI_BUTTON_CLICK,
             TORCH_BUTTON_CLICK,
             HEAVY_BUTTON_CLICK,
-            PS_LEVER_STATE
+            PS_LEVER_STATE,
+            JIGSAW_CLIP
         }
 
         [Header("Ambient Clips")]
@@ -27,6 +28,7 @@ namespace Nfynt
         public AudioClip torchButtonClip;
         public AudioClip heavyButtonClip;
         public AudioClip powerSupplyLevelClip;
+        public AudioClip jigsawClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -78,6 +80,9 @@ namespace Nfynt
                     break;
                 case ClipType.PS_LEVER_STATE:
                     audioSrc.clip = powerSupplyLevelClip;
+                    break;
+                case ClipType.JIGSAW_CLIP:
+                    audioSrc.clip = jigsawClip;
                     break;
             }
             audSrc.Play();

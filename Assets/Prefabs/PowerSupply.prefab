@@ -2945,7 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840d46a8acbda73438986cf284e75cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  psb: {fileID: 0}
+  psb: {fileID: 8672426234320828819}
   activationColor: {r: 0.0627451, g: 0.4, b: 0.9490196, a: 1}
   rend: {fileID: 8672426234986089417}
 --- !u!1 &3514642239703068616
