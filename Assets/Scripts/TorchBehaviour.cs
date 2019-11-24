@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leap.Unity;
 using Leap.Unity.Interaction;
 
 namespace Nfynt.Components
@@ -22,12 +23,30 @@ namespace Nfynt.Components
         public Texture2D uvIcon;
         public Texture2D saberIcon;
 
-        public States currState;
-        public States lastState;
+        [Tooltip("object will lerp to its hoverColor when a hand is nearby.")]
+        public bool useHover = true;
+
+        [Tooltip("use its primaryHoverColor when the primary hover of an InteractionHand.")]
+        public bool usePrimaryHover = false;
+
+        [Header("InteractionBehaviour Colors")]
+        public Color defaultColor = Color.Lerp(Color.black, Color.white, 0.1F);
+        public Color suspendedColor = Color.red;
+        public Color hoverColor = Color.Lerp(Color.black, Color.white, 0.7F);
+        public Color primaryHoverColor = Color.Lerp(Color.black, Color.white, 0.8F);
+
+        [Header("InteractionButton Colors")]
+        [Tooltip("This color only applies if the object is an InteractionButton or InteractionSlider.")]
+        public Color pressedColor = Color.white;
+
+
+        private States currState;
+        private States lastState;
         private bool readyToswitch;
         private Vector3 normalButtonPos;
         [SerializeField]
         private float pressHeight = 0.2f;
+        private Material buttonMat;
         private Material buttonIconMat;
         private InteractionBehaviour btnIntObj;
         private AudioSource audSrc;
@@ -35,6 +54,7 @@ namespace Nfynt.Components
         private void Awake()
         {
             btnIntObj = buttonTrans.GetComponent<InteractionBehaviour>();
+            buttonMat = buttonTrans.GetComponent<MeshRenderer>().material;
             buttonIconMat = buttonTrans.GetChild(0).GetComponent<MeshRenderer>().material;
             audSrc = GetComponent<AudioSource>();
         }
@@ -49,6 +69,33 @@ namespace Nfynt.Components
             audSrc.loop = false;
             audSrc.playOnAwake = false;
             audSrc.Stop();
+        }
+
+        void Update()
+        {
+            if (buttonMat != null)
+            {
+                Color targetColor = defaultColor;
+                if (btnIntObj.isPrimaryHovered && usePrimaryHover)
+                    targetColor = primaryHoverColor;
+                else
+                {
+                    if (btnIntObj.isHovered && useHover)
+                    {
+                        float glow = btnIntObj.closestHoveringControllerDistance.Map(0F, 0.2F, 1F, 0.0F);
+                        targetColor = Color.Lerp(defaultColor, hoverColor, glow);
+                    }
+                }
+
+                if (btnIntObj.isSuspended)
+                    targetColor = suspendedColor;
+
+                if (btnIntObj is InteractionButton && (btnIntObj as InteractionButton).isPressed)
+                    targetColor = pressedColor;
+
+                // Lerp actual material color to the target color.
+                buttonMat.color = Color.Lerp(buttonMat.color, targetColor, 30F * Time.deltaTime);
+            }
         }
 
         void UpdateTorchState(States newState)

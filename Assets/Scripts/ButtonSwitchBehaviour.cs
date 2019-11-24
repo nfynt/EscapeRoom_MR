@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Nfynt.Components
 {
     [RequireComponent(typeof(AudioSource))]
-    public class ButtonSwitchBehaviour : MonoBehaviour
+    public class ButtonSwitchBehaviour : MonoBehaviour, IPowerDevice
     {
         public enum State
         {
@@ -23,13 +23,19 @@ namespace Nfynt.Components
         public State currState = State.OFF;
         public Transform buttonObj;
         public float angleChange = 20f;
-        public AudioClip buttonPressClip;
 
         private AudioSource audSrc;
+        private bool mainsOn;
+        
+        private void Start()
+        {
+            audSrc = GetComponent<AudioSource>();
+            InitBehaviour();
+        }
 
         void InitBehaviour()
         {
-            if(currState==State.OFF)
+            if (currState == State.OFF)
             {
                 buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
             }
@@ -37,14 +43,15 @@ namespace Nfynt.Components
             {
                 buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
             }
-            audSrc.clip = buttonPressClip;
+            audSrc.Stop();
             audSrc.loop = false;
-        }
-
-        private void Start()
-        {
-            audSrc = GetComponent<AudioSource>();
-            InitBehaviour();
+            if (PowerSupplyBehaviour.Instance != null)
+                PowerSupplyBehaviour.Instance.AddDevice(this);
+            else
+            {
+                PowerSupplyBehaviour pb = FindObjectOfType<PowerSupplyBehaviour>();
+                pb.AddDevice(this);
+            }
         }
 
         public void ToggleSwitchState()
@@ -53,17 +60,37 @@ namespace Nfynt.Components
             {
                 currState = State.ON;
                 buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
-                SwitchState.Invoke(true);
-                audSrc.Play();
-
+                if (mainsOn)
+                    SwitchState.Invoke(true);
+                //audSrc.Play();
+                AudioManager.Instance.PlayClip(AudioManager.ClipType.TORCH_BUTTON_CLICK, audSrc, 0.5f);
             }
             else
             {
                 currState = State.OFF;
                 buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
-                SwitchState.Invoke(false);
-                audSrc.Play();
+                if (mainsOn)
+                    SwitchState.Invoke(false);
+                //audSrc.Play();
+                AudioManager.Instance.PlayClip(AudioManager.ClipType.TORCH_BUTTON_CLICK, audSrc, 0.5f);
             }
+        }
+
+        public void PowerSourceStateChanged(bool isOn)
+        {
+            if(currState== State.ON && !isOn)
+            {
+                SwitchState.Invoke(false);
+            }
+            else if(currState == State.ON && isOn)
+            {
+                SwitchState.Invoke(true);
+            }
+        }
+
+        public void SetMainsState(bool isOn)
+        {
+            mainsOn = isOn;
         }
     }
 }
