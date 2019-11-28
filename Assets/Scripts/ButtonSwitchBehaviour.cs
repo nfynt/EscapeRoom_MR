@@ -78,7 +78,8 @@ namespace Nfynt.Components
 
         public void PowerSourceStateChanged(bool isOn)
         {
-            if(currState== State.ON && !isOn)
+            mainsOn = isOn;
+            if (currState== State.ON && !isOn)
             {
                 SwitchState.Invoke(false);
             }

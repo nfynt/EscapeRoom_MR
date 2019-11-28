@@ -14,7 +14,9 @@ namespace Nfynt
             TORCH_BUTTON_CLICK,
             HEAVY_BUTTON_CLICK,
             PS_LEVER_STATE,
-            JIGSAW_CLIP
+            JIGSAW_CLIP,
+            DIGILOCKKEY,
+            DIGILOCKOPEN
         }
 
         [Header("Ambient Clips")]
@@ -29,6 +31,8 @@ namespace Nfynt
         public AudioClip heavyButtonClip;
         public AudioClip powerSupplyLevelClip;
         public AudioClip jigsawClip;
+        public AudioClip digiLockKeyPressClip;
+        public AudioClip digiLockOpenClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -83,6 +87,12 @@ namespace Nfynt
                     break;
                 case ClipType.JIGSAW_CLIP:
                     audioSrc.clip = jigsawClip;
+                    break;
+                case ClipType.DIGILOCKKEY:
+                    audioSrc.clip = digiLockKeyPressClip;
+                    break;
+                case ClipType.DIGILOCKOPEN:
+                    audioSrc.clip = digiLockOpenClip;
                     break;
             }
             audSrc.Play();
