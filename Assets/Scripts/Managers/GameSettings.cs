@@ -10,11 +10,11 @@ namespace Nfynt
         /// <summary>
         /// Audio effects
         /// </summary>
-        public static bool isSFXOn;
+        public static bool isSFXOn=true;
         /// <summary>
         /// Ambient music
         /// </summary>
-        public static bool isMusicOn;
+        public static bool isMusicOn=true;
 
         public void ApplyDefaultSettings()
         {

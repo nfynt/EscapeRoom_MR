@@ -248,7 +248,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -347,4 +347,3 @@ MonoBehaviour:
   currState: 1
   buttonObj: {fileID: 5986339657849724127}
   angleChange: 20
-  buttonPressClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291, type: 3}

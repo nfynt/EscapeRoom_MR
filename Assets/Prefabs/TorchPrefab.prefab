@@ -258,9 +258,14 @@ MonoBehaviour:
   torchIcon: {fileID: 2800000, guid: bc93fc9507bf7474c9db4053efeff218, type: 3}
   uvIcon: {fileID: 2800000, guid: 61a182e6ea2121b439e041b8e23f5a01, type: 3}
   saberIcon: {fileID: 2800000, guid: d57b96c9e58708c40ba5bba21e859cec, type: 3}
-  currState: 0
-  lastState: 0
-  pressHeight: 0.2
+  useHover: 1
+  usePrimaryHover: 1
+  defaultColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+  suspendedColor: {r: 1, g: 0, b: 0, a: 1}
+  hoverColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  primaryHoverColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  pressedColor: {r: 1, g: 1, b: 1, a: 1}
+  pressHeight: 0.3
 --- !u!82 &2160556664321287865
 AudioSource:
   m_ObjectHideFlags: 0
@@ -588,7 +593,6 @@ GameObject:
   - component: {fileID: 8412969166880595156}
   - component: {fileID: 8412969166880595147}
   - component: {fileID: 8412969166880595152}
-  - component: {fileID: 8412969166880595159}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -682,85 +686,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &8412969166880595159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8412969166880595146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _manager: {fileID: 0}
-  _ignoreHoverMode: 0
-  _isIgnoringAllHoverState: 0
-  _ignorePrimaryHover: 0
-  _ignoreContact: 0
-  _ignoreGrasping: 1
-  _contactForceMode: 0
-  _allowMultiGrasp: 0
-  _moveObjectWhenGrasped: 1
-  graspedMovementType: 0
-  _overrideInteractionLayer: 1
-  _interactionLayer:
-    layerIndex: 9
-  _overrideNoContactLayer: 1
-  _noContactLayer:
-    layerIndex: 10
-  _eventTable:
-    _entries:
-    - enumValue: 170
-      callback:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 2160556664321287864}
-            m_MethodName: ButtonContactBegin
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - enumValue: 171
-      callback:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 2160556664321287864}
-            m_MethodName: ButtonContactEnd
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - enumValue: 121
-      callback:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 2160556664321287864}
-            m_MethodName: ButtonContactEnd
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+  m_CollisionDetection: 2
 --- !u!1 &8412969167041665518
 GameObject:
   m_ObjectHideFlags: 0
