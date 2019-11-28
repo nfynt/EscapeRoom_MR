@@ -1612,6 +1612,11 @@ MonoBehaviour:
   homeClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
   mainClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
   clickClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
+  torchButtonClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
+  heavyButtonClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291, type: 3}
+  powerSupplyLevelClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291,
+    type: 3}
+  jigsawClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
 --- !u!1 &1311513746
 GameObject:
   m_ObjectHideFlags: 0
