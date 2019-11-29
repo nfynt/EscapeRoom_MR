@@ -1,36 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class test2 : MonoBehaviour
 {
-    public bool track;
-    public Transform target;
+    static List<InputDevice> devices = new List<InputDevice>();
+    [SerializeField]
+    InputDeviceRole role;
 
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
-    }
-
-    private void Update()
-    {
-        if(track && target!=null)
+        InputDevices.GetDevicesWithRole(role, devices);
+        if (devices.Count > 0)
         {
-            Vector3 dir = target.position - transform.position;
-            
-            transform.rotation = Quaternion.LookRotation(dir,transform.forward)*Quaternion.AngleAxis(90,transform.right);
+            InputDevice device = devices[0];
+            Vector3 position;
+            if (device.TryGetFeatureValue(CommonUsages.devicePosition, out position))
+                this.transform.position = position;
+            Quaternion rotation;
+            if (device.TryGetFeatureValue(CommonUsages.deviceRotation, out rotation))
+                this.transform.rotation = rotation;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (target==null) return;
-        Vector3 dir = target.position - transform.position;
-
-        Vector3 tar = new Vector3(dir.x, dir.y, dir.z);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, dir);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.up);
     }
 }

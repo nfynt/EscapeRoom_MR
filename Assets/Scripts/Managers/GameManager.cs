@@ -22,7 +22,7 @@ namespace Nfynt
         /// </summary>
         public void SwitchToVRAndLoadMainScene()
         {
-            StartCoroutine(ToggleVR("Main"));
+            StartCoroutine(ToggleVR(GameSettings.mainSceneName));
         }
 
         IEnumerator ToggleVR(string sceneName)
@@ -46,7 +46,7 @@ namespace Nfynt
         /// </summary>
         public void SwitchToNonVRAndLoadHome()
         {
-            StartCoroutine(ToggleVR("Home"));
+            StartCoroutine(ToggleVR(GameSettings.menuSceneName));
         }
     }
 }

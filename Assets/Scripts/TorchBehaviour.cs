@@ -48,12 +48,12 @@ namespace Nfynt.Components
         private float pressHeight = 0.2f;
         private Material buttonMat;
         private Material buttonIconMat;
-        private InteractionBehaviour btnIntObj;
+        //private InteractionBehaviour btnIntObj;
         private AudioSource audSrc;
 
         private void Awake()
         {
-            btnIntObj = buttonTrans.GetComponent<InteractionBehaviour>();
+            //btnIntObj = buttonTrans.GetComponent<InteractionBehaviour>();
             buttonMat = buttonTrans.GetComponent<MeshRenderer>().material;
             buttonIconMat = buttonTrans.GetChild(0).GetComponent<MeshRenderer>().material;
             audSrc = GetComponent<AudioSource>();
@@ -71,32 +71,32 @@ namespace Nfynt.Components
             audSrc.Stop();
         }
 
-        void Update()
-        {
-            if (buttonMat != null)
-            {
-                Color targetColor = defaultColor;
-                if (btnIntObj.isPrimaryHovered && usePrimaryHover)
-                    targetColor = primaryHoverColor;
-                else
-                {
-                    if (btnIntObj.isHovered && useHover)
-                    {
-                        float glow = btnIntObj.closestHoveringControllerDistance.Map(0F, 0.2F, 1F, 0.0F);
-                        targetColor = Color.Lerp(defaultColor, hoverColor, glow);
-                    }
-                }
+        //void Update()
+        //{
+        //    if (buttonMat != null)
+        //    {
+        //        Color targetColor = defaultColor;
+        //        if (btnIntObj.isPrimaryHovered && usePrimaryHover)
+        //            targetColor = primaryHoverColor;
+        //        else
+        //        {
+        //            if (btnIntObj.isHovered && useHover)
+        //            {
+        //                float glow = btnIntObj.closestHoveringControllerDistance.Map(0F, 0.2F, 1F, 0.0F);
+        //                targetColor = Color.Lerp(defaultColor, hoverColor, glow);
+        //            }
+        //        }
 
-                if (btnIntObj.isSuspended)
-                    targetColor = suspendedColor;
+        //        if (btnIntObj.isSuspended)
+        //            targetColor = suspendedColor;
 
-                if (btnIntObj is InteractionButton && (btnIntObj as InteractionButton).isPressed)
-                    targetColor = pressedColor;
+        //        if (btnIntObj is InteractionButton && (btnIntObj as InteractionButton).isPressed)
+        //            targetColor = pressedColor;
 
-                // Lerp actual material color to the target color.
-                buttonMat.color = Color.Lerp(buttonMat.color, targetColor, 30F * Time.deltaTime);
-            }
-        }
+        //        // Lerp actual material color to the target color.
+        //        buttonMat.color = Color.Lerp(buttonMat.color, targetColor, 30F * Time.deltaTime);
+        //    }
+        //}
 
         void UpdateTorchState(States newState)
         {
@@ -130,29 +130,29 @@ namespace Nfynt.Components
             currState = newState;
         }
 
-        public void ButtonContactBegin()
-        {
-            readyToswitch = true;
-            buttonTrans.localPosition -= new Vector3(0f, pressHeight, 0f);
-        }
+        //public void ButtonContactBegin()
+        //{
+        //    readyToswitch = true;
+        //    buttonTrans.localPosition -= new Vector3(0f, pressHeight, 0f);
+        //}
 
-        public void ButtonContactEnd()
-        {
-            if (!readyToswitch || btnIntObj.GetHoverDistance(buttonTrans.position)<pressHeight) return;
+        //public void ButtonContactEnd()
+        //{
+        //    if (!readyToswitch || btnIntObj.GetHoverDistance(buttonTrans.position)<pressHeight) return;
 
-            readyToswitch = false;
-            buttonTrans.localPosition = normalButtonPos;
-            TorchButtonPressed();
-        }
+        //    readyToswitch = false;
+        //    buttonTrans.localPosition = normalButtonPos;
+        //    TorchButtonPressed();
+        //}
 
-        public void ButtonHoverEnd()
-        {
-            if (!readyToswitch) return;
+        //public void ButtonHoverEnd()
+        //{
+        //    if (!readyToswitch) return;
 
-            readyToswitch = false;
-            buttonTrans.localPosition = normalButtonPos;
-            TorchButtonPressed();
-        }
+        //    readyToswitch = false;
+        //    buttonTrans.localPosition = normalButtonPos;
+        //    TorchButtonPressed();
+        //}
 
         public void TorchButtonPressed()
         {

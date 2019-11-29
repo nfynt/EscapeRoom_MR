@@ -2088,64 +2088,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa010a1e75292e49a24f3f71bb9cddb, type: 3}
---- !u!1 &718168732 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8412969166880595146, guid: a1d5af838c8c8094dad1c4f98a9b08a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8412969167322445860}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &718168734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718168732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cba520a60e47274cb1e5afbb57aae0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _manager: {fileID: 1964586017}
-  _ignoreHoverMode: 0
-  _isIgnoringAllHoverState: 0
-  _ignorePrimaryHover: 0
-  _ignoreContact: 0
-  _ignoreGrasping: 1
-  _contactForceMode: 1
-  _allowMultiGrasp: 0
-  _moveObjectWhenGrasped: 0
-  graspedMovementType: 2
-  _overrideInteractionLayer: 1
-  _interactionLayer:
-    layerIndex: 9
-  _overrideNoContactLayer: 1
-  _noContactLayer:
-    layerIndex: 10
-  _eventTable:
-    _entries: []
-  _controlEnabled: 1
-  startingPositionMode: 0
-  minMaxHeight: {x: 0, y: 0.03}
-  restingHeight: 0.5
-  _springForce: 0.1
-  _OnPress:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1961679537}
-        m_MethodName: TorchButtonPressed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _OnUnpress:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &746732882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,18 +3871,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901252787}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1961679537 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2160556664321287864, guid: a1d5af838c8c8094dad1c4f98a9b08a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8412969167322445860}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1079cdcf8e9144e4e99950df87db5214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1964586015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,7 +4299,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2109605002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5961f713e6530454d922cb2ab18758a0, type: 3}
   m_Name: 
@@ -5070,6 +5000,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7990674040420998573, guid: a1d5af838c8c8094dad1c4f98a9b08a7,
+        type: 3}
+      propertyPath: _manager
+      value: 
+      objectReference: {fileID: 1964586017}
     - target: {fileID: 0}
       propertyPath: _manager
       value: 
