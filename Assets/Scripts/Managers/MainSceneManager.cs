@@ -28,6 +28,7 @@ namespace Nfynt.Managers
             audMgr.SetAmbientAudioSrc(ambientAudio);
         }
 
+
 #if UNITY_EDITOR
         IEnumerator SwitchVRMode()
         {

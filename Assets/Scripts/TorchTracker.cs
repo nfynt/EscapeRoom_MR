@@ -2,46 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using Nfynt.Components;
 
 namespace Nfynt.Tracking
 {
-    public class ViveTracker : Singleton<ViveTracker>
+    public class TorchTracker : Singleton<TorchTracker>
     {
         static List<InputDevice> devices = new List<InputDevice>();
 
         public Transform torchObj;
         public InputDeviceRole controllerRole;
-        public Transform trackedObj1;
+        public TorchBehaviour tb;
 
         private InputDevice controller;
-        private InputDevice tracker;
-
-        void Start()
-        {
-            InputDevices.GetDevices(devices);
-
-            foreach (var device in devices)
-            {
-                Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-            }
-
-            controller = devices.Find(d => d.role == controllerRole);
-            tracker = devices.Find(d => d.role == InputDeviceRole.HardwareTracker);
-        }
+        private bool pressedState;
 
         void Update()
         {
             InputDevices.GetDevicesWithRole(controllerRole, devices);
             if (devices.Count > 0)
                 controller = devices[0];
-
-            if (tracker != null && trackedObj1 != null)
-            {
-                tracker.TryGetFeatureValue(CommonUsages.devicePosition, out var pos);
-                trackedObj1.position = pos;
-                tracker.TryGetFeatureValue(CommonUsages.deviceRotation, out var rot);
-                trackedObj1.rotation = rot;
-            }
 
             if (controller != null && torchObj != null)
             {
@@ -53,11 +33,19 @@ namespace Nfynt.Tracking
                     torchObj.rotation = rot;
 
                 //float triggerVal=0f;
-                bool touch=false;
-                if (controller.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out touch))
+                bool touch = false;
+                if (controller.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out touch) && touch)
                 {
                     Debug.Log("Touch Pressed: " + touch.ToString());
-                   // Debug.Log("Trigger Pressed: "+triggerVal.ToString());
+                    // Debug.Log("Trigger Pressed: "+triggerVal.ToString());
+                    if (!pressedState)
+                    {
+                        tb.TorchButtonPressed();
+                        pressedState = true;
+                    }
+                }else if (pressedState)
+                {
+                    pressedState = false;
                 }
             }
 

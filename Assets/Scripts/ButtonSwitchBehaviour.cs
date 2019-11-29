@@ -37,11 +37,11 @@ namespace Nfynt.Components
         {
             if (currState == State.OFF)
             {
-                buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
+                buttonObj.transform.rotation = Quaternion.Euler(-buttonObj.right * angleChange);
             }
             else
             {
-                buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
+                buttonObj.transform.rotation = Quaternion.Euler(buttonObj.right * angleChange);
             }
             audSrc.Stop();
             audSrc.loop = false;

@@ -21,6 +21,8 @@ namespace Nfynt
             isSFXOn = true;
             isMusicOn = true;
         }
+        public static string mainSceneName="MainScene";
+        public static string menuSceneName = "Home";
     }
 }
 

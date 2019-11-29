@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Nfynt.Components;
-using Nfynt.Behaviours;
 
 namespace Nfynt.Managers
 {
