@@ -8,33 +8,30 @@ namespace Nfynt.Tracking
 {
     public class TorchTracker : Singleton<TorchTracker>
     {
-        static List<InputDevice> devices = new List<InputDevice>();
-
         public Transform torchObj;
         public InputDeviceRole controllerRole;
+        public int ind = 0;
         public TorchBehaviour tb;
 
-        private InputDevice controller;
+        private List<InputDevice> tracker = new List<InputDevice>();
         private bool pressedState;
+
+        private void Start()
+        {
+            tracker = ViveTracker.Instance.GetTrackedDevices(controllerRole);
+        }
 
         void Update()
         {
-            InputDevices.GetDevicesWithRole(controllerRole, devices);
-            if (devices.Count > 0)
-                controller = devices[0];
-
-            if (controller != null && torchObj != null)
+            if (tracker.Count>ind && tracker[ind].isValid && torchObj != null)
             {
-                Vector3 pos;
-                Quaternion rot;
-                if (controller.TryGetFeatureValue(CommonUsages.devicePosition, out pos))
+                if (tracker[ind].TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
                     torchObj.position = pos;
-                if (controller.TryGetFeatureValue(CommonUsages.deviceRotation, out rot))
+                if (tracker[ind].TryGetFeatureValue(CommonUsages.deviceRotation, out var rot))
                     torchObj.rotation = rot;
 
                 //float triggerVal=0f;
-                bool touch = false;
-                if (controller.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out touch) && touch)
+                if (tracker[ind].TryGetFeatureValue(CommonUsages.primary2DAxisClick, out var touch) && touch)
                 {
                     Debug.Log("Touch Pressed: " + touch.ToString());
                     // Debug.Log("Trigger Pressed: "+triggerVal.ToString());
@@ -46,6 +43,17 @@ namespace Nfynt.Tracking
                 }else if (pressedState)
                 {
                     pressedState = false;
+                }
+            }
+            else
+            {
+                if (tracker.Count > ind)
+                    tracker = ViveTracker.Instance.GetTrackedDevices(controllerRole);
+                else
+                {
+                    ViveTracker.Instance.RefreshDeviceList();
+                    tracker = ViveTracker.Instance.GetTrackedDevices(controllerRole);
+                    Debug.LogWarning("Invalid index number");
                 }
             }
 

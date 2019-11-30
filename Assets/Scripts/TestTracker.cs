@@ -5,7 +5,7 @@ using UnityEngine.XR;
 
 namespace Nfynt.Tracking
 {
-    public class StoolTracker : Singleton<StoolTracker>
+    public class TestTracker : MonoBehaviour
     {
         public Transform stoolObj;
         public InputDeviceRole controllerRole;
