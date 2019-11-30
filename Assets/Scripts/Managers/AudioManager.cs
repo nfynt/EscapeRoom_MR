@@ -16,7 +16,10 @@ namespace Nfynt
             PS_LEVER_STATE,
             JIGSAW_CLIP,
             DIGILOCKKEY,
-            DIGILOCKOPEN
+            DIGILOCKOPEN,
+            KEYBOARDKEYPRESS,
+            LOGIN,
+            LOGINFAILED
         }
 
         [Header("Ambient Clips")]
@@ -33,6 +36,9 @@ namespace Nfynt
         public AudioClip jigsawClip;
         public AudioClip digiLockKeyPressClip;
         public AudioClip digiLockOpenClip;
+        public AudioClip keyboardKeyPressClip;
+        public AudioClip loginClip;
+        public AudioClip loginFailedClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -93,6 +99,15 @@ namespace Nfynt
                     break;
                 case ClipType.DIGILOCKOPEN:
                     audioSrc.clip = digiLockOpenClip;
+                    break;
+                case ClipType.KEYBOARDKEYPRESS:
+                    audioSrc.clip = keyboardKeyPressClip;
+                    break;
+                case ClipType.LOGIN:
+                    audioSrc.clip = loginClip;
+                    break;
+                case ClipType.LOGINFAILED:
+                    audioSrc.clip = loginFailedClip;
                     break;
             }
             audSrc.Play();

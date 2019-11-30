@@ -39,7 +39,7 @@ namespace Nfynt.Components
             foreach (GameObject go in targetPieces)
                 go.GetComponent<JigsawPieceBehaviour>().boardPos = ind++;
         }
-
+        
         /// <summary>
         /// Count of solved pieces.
         /// </summary>

@@ -3,35 +3,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
+using Nfynt;
 
 namespace Nfynt.Components
 {
     public class KeyboardController : MonoBehaviour
     {
-        public string currStr;
-        
+        public ComputerController compController;
+
+        private AudioManager audMgr;
+
+        private void Start()
+        {
+            audMgr = AudioManager.Instance;
+        }
+
         private void OnEnable()
         {
             foreach(InteractionBehaviour ib in transform.GetComponentsInChildren<InteractionBehaviour>())
             {
-                ib.OnContactEnd += delegate { KeyPressed(ib.gameObject.name); };
+                ib.OnContactEnd += delegate { KeyReleased(ib.gameObject.name); };
+                ib.OnContactBegin += delegate { KeyPressed(); };
             }
         }
 
-        public void KeyPressed(string key)
+        public void KeyPressed()
         {
-            //Debug.Log("Key Pressed: " + key);
-            switch(key)
+            audMgr.PlayClip(AudioManager.ClipType.KEYBOARDKEYPRESS, compController.audSrc, 0.5f);
+        }
+
+        public void KeyReleased(string key)
+        {
+            compController.KeyPressed(key);
+            audMgr.PlayClip(AudioManager.ClipType.KEYBOARDKEYPRESS, compController.audSrc, 0.5f);
+        }
+
+        private void OnDisable()
+        {
+            foreach (InteractionBehaviour ib in transform.GetComponentsInChildren<InteractionBehaviour>())
             {
-                case "BSP":
-                    currStr = currStr.Substring(0, currStr.Length - 1);
-                    break;
-                case "RTN":
-                    currStr = "";
-                    break;
-                default:
-                    currStr += key;
-                    break;
+                ib.OnContactEnd -= delegate { KeyReleased(ib.gameObject.name); };
+                ib.OnContactBegin -= delegate { KeyPressed(); };
             }
         }
     }

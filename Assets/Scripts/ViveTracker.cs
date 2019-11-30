@@ -33,10 +33,10 @@ namespace Nfynt.Tracking
         public void RefreshDeviceList()
         {
             InputDevices.GetDevices(devices);
-            foreach (var device in devices)
-            {
-                Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-            }
+            //foreach (var device in devices)
+            //{
+            //    Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
+            //}
         }
 
         public InputDevice GetFirstDevice(InputDeviceRole role)

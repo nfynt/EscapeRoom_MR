@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 7437036139874965425}
   - component: {fileID: 7437036139874965430}
   - component: {fileID: 7437036139874965431}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,4 +1046,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   torchObj: {fileID: 9184052273399568385}
   controllerRole: 3
+  ind: 0
   tb: {fileID: 1012923728223851177}

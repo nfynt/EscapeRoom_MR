@@ -7,7 +7,7 @@ namespace Nfynt.Components
     [RequireComponent(typeof(AudioSource))]
     public class ButtonSwitchBehaviour : MonoBehaviour, IPowerDevice
     {
-        public enum State
+        enum State
         {
             ON,
             OFF
@@ -20,10 +20,10 @@ namespace Nfynt.Components
         public delegate void SwitchStateChanged(bool isOn);
         public event SwitchStateChanged SwitchState;
 
-        public State currState = State.OFF;
         public Transform buttonObj;
         public float angleChange = 20f;
 
+        private State currState = State.OFF;
         private AudioSource audSrc;
         private bool mainsOn;
         

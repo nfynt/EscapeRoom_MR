@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BreakableWindow : MonoBehaviour {
 
-    
+    public GameObject jigsawPiece;
     [Tooltip("Layer should be TransparentFX or your own layer for breakable windows.")]
     public LayerMask layer;
     [Range(2,25)]
@@ -236,6 +236,7 @@ public class BreakableWindow : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+        Debug.Log("Window: "+col.gameObject.name);
         if (useCollision == true)
         {
             if (health > 0)
@@ -247,7 +248,12 @@ public class BreakableWindow : MonoBehaviour {
                     breakWindow();
                 }
             }
-            else breakWindow();
+            else
+            {
+                breakWindow();
+                if (jigsawPiece != null)
+                    jigsawPiece.GetComponent<Rigidbody>().isKinematic = false;
+            }
         }        
     }
 }
