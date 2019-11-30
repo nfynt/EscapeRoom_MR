@@ -1617,6 +1617,13 @@ MonoBehaviour:
   powerSupplyLevelClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291,
     type: 3}
   jigsawClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
+  digiLockKeyPressClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be,
+    type: 3}
+  digiLockOpenClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
+  keyboardKeyPressClip: {fileID: 8300000, guid: 48497e8cc59ce4de88cae5790d465014,
+    type: 3}
+  loginClip: {fileID: 8300000, guid: 6a0aa7742137b4b13af8347cb830a4a7, type: 3}
+  loginFailedClip: {fileID: 8300000, guid: 52189df4c43094e1d9fd9cd8eae940c1, type: 3}
 --- !u!1 &1311513746
 GameObject:
   m_ObjectHideFlags: 0

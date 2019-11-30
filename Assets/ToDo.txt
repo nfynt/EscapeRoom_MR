@@ -1,19 +1,19 @@
 =======List of tasks to be done
 
 Shubham
-1. leap motion interactions (Done)
-2. hand pose detections and events (Done)
-3. Vive/leap camera access 
+1. leap motion interactions
+2. hand pose detections and events
+3. Vive/leap camera access
 
 
 Bill
 1. level design
-2. story construct
+2. Puzzle research
 
 
 Jas
 1. story construct
-2. architecture and documentation
+2. 
 
 Shanshan
 1. puzzles research

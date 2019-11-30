@@ -22,7 +22,7 @@ namespace Nfynt
         /// </summary>
         public void SwitchToVRAndLoadMainScene()
         {
-            StartCoroutine(ToggleVR("Main"));
+            StartCoroutine(ToggleVR(GameSettings.mainSceneName));
         }
 
         IEnumerator ToggleVR(string sceneName)
@@ -41,12 +41,39 @@ namespace Nfynt
             Debug.Log(sceneName + " loaded");
         }
 
+        private void Update()
+        {
+            //Reload current scene on Ctrl + R
+            if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyUp(KeyCode.R))
+            {
+                StartCoroutine(ResetCurrentLevel());
+            }
+        }
+
         /// <summary>
         /// Switch to non vr mode and load home scene
         /// </summary>
         public void SwitchToNonVRAndLoadHome()
         {
-            StartCoroutine(ToggleVR("Home"));
+            StartCoroutine(ToggleVR(GameSettings.menuSceneName));
+        }
+
+        IEnumerator ResetCurrentLevel()
+        {
+            Debug.Log("Reloading current scene");
+            string currScene = SceneManager.GetActiveScene().name;
+
+            AsyncOperation unload = SceneManager.LoadSceneAsync(currScene);
+            Resources.UnloadUnusedAssets();
+            yield return new WaitUntil(() => !unload.isDone);
+
+            Debug.Log(currScene + " Unloaded!");
+
+            AsyncOperation load = SceneManager.LoadSceneAsync(currScene,LoadSceneMode.Single);
+            yield return new WaitUntil(() => !load.isDone);
+
+            Debug.Log(currScene + " Loaded!");
+
         }
     }
 }
