@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4837711083660625437}
   - component: {fileID: 4837711083660625411}
   m_Layer: 0
-  m_Name: jigsawPiece1
+  m_Name: JigsawPiece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
