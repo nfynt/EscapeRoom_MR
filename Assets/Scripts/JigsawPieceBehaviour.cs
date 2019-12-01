@@ -12,7 +12,7 @@ namespace Nfynt.Components {
         private Rigidbody rBody;
         private JigsawBoardController jbController;
         public int boardPos = 1;
-        private Collider connectedCollider;
+        public Collider connectedCollider;
 
         private void Start()
         {
@@ -25,7 +25,8 @@ namespace Nfynt.Components {
         public void OnGrassped()
         {
             rBody.isKinematic = false;
-            jbController.ReleaseSlot(connectedCollider);
+            if (connectedCollider != null)
+                jbController.ReleaseSlot(connectedCollider);
         }
 
         public void GraspReleased()

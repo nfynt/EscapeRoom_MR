@@ -60,7 +60,7 @@ namespace Nfynt.Components
             {
                 currState = State.ON;
                 buttonObj.transform.localRotation = Quaternion.Euler(buttonObj.right * angleChange);
-                if (mainsOn)
+                if (mainsOn && SwitchState!=null)
                     SwitchState.Invoke(true);
                 //audSrc.Play();
                 AudioManager.Instance.PlayClip(AudioManager.ClipType.TORCH_BUTTON_CLICK, audSrc, 0.5f);
@@ -69,7 +69,7 @@ namespace Nfynt.Components
             {
                 currState = State.OFF;
                 buttonObj.transform.localRotation = Quaternion.Euler(-buttonObj.right * angleChange);
-                if (mainsOn)
+                if (mainsOn && SwitchState != null)
                     SwitchState.Invoke(false);
                 //audSrc.Play();
                 AudioManager.Instance.PlayClip(AudioManager.ClipType.TORCH_BUTTON_CLICK, audSrc, 0.5f);

@@ -17,27 +17,32 @@ namespace Nfynt.Components
         /// <summary>
         /// Whether the slots are free
         /// </summary>
-        private List<bool> slotsFree;
+        public List<bool> slotsFree;
         /// <summary>
         /// Which slots have been solved
         /// </summary>
-        private List<bool> solved;
+        public List<bool> solved;
 
         private void Start()
         {
             slots = new List<Collider>();
-            slotsFree = new List<bool>();
-            solved = new List<bool>();
+            //slotsFree = new List<bool>();
+            //solved = new List<bool>();
             foreach (Collider col in transform.GetComponentsInChildren<Collider>())
             {
                 slots.Add(col);
-                slotsFree.Add(true);
-                solved.Add(false);
+                //slotsFree.Add(true);
+                //solved.Add(false);
+            }
+
+            //int ind = 0;
+            for (int i=0;i<slotsFree.Count;i++)
+            {
+                targetPieces[i].GetComponent<JigsawPieceBehaviour>().boardPos = i;
+                if (!slotsFree[i])
+                    targetPieces[i].GetComponent<JigsawPieceBehaviour>().connectedCollider = slots[i];
             }
             
-            int ind = 0;
-            foreach (GameObject go in targetPieces)
-                go.GetComponent<JigsawPieceBehaviour>().boardPos = ind++;
         }
         
         /// <summary>
@@ -58,7 +63,10 @@ namespace Nfynt.Components
             int ind = slots.IndexOf(col);
 
             if (ind < 0)
+            {
+                Debug.Log("Invalid collider passed from: " + col.gameObject.name);
                 return false;   //collider is not part of current board
+            }
 
             if (slotsFree[ind])
                 return true;

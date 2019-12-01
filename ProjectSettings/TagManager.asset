@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - JigsawBoard
+  - Nail
   layers:
   - Default
   - TransparentFX

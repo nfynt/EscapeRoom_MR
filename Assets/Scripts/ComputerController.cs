@@ -27,6 +27,7 @@ namespace Nfynt.Components
         public TMP_InputField passwordInput;
         public TextMeshProUGUI errorTxt;
         public AudioSource audSrc;
+        public int maxLength = 10;
 
         [SerializeField]
         private string userPassword = "1234";
@@ -82,8 +83,13 @@ namespace Nfynt.Components
                     }
                     currPass = "";
                     break;
+                case "SPC":
+                    if (currPass.Length < maxLength)
+                        currPass += " ";
+                    break;
                 default:
-                    currPass += key;
+                    if (currPass.Length < maxLength)
+                        currPass += key;
                     break;
             }
             passwordInput.text = currPass;
