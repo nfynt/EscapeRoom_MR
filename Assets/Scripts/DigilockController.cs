@@ -128,7 +128,7 @@ namespace Nfynt.Components
 			}
 
 			digitalDisplay.text = currStr;
-			audMgr.PlayClip(AudioManager.ClipType.DIGILOCKKEY, null, 0.5f);
+			audMgr.PlayClip(AudioManager.ClipType.DIGILOCKKEY, GetComponent<AudioSource>(), 0.5f);
 		}
 
 		void CheckForPass()
@@ -140,7 +140,7 @@ namespace Nfynt.Components
 			{
 				currStr = "_";
 				UpdateState();
-				audMgr.PlayClip(AudioManager.ClipType.DIGILOCKOPEN, null, 0.5f);
+				audMgr.PlayClip(AudioManager.ClipType.DIGILOCKOPEN, GetComponent<AudioSource>(), 0.5f);
 			}
 			else
 			{

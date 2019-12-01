@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Nfynt.Managers;
 
 namespace Nfynt.Components
 {
@@ -23,6 +24,9 @@ namespace Nfynt.Components
         /// </summary>
         public List<bool> solved;
 
+        private bool boardSolvedOnce;
+        MainSceneManager msMgr;
+
         private void Start()
         {
             slots = new List<Collider>();
@@ -42,7 +46,11 @@ namespace Nfynt.Components
                 if (!slotsFree[i])
                     targetPieces[i].GetComponent<JigsawPieceBehaviour>().connectedCollider = slots[i];
             }
-            
+            boardSolvedOnce = false;
+            if (MainSceneManager.Instance != null)
+                msMgr = MainSceneManager.Instance;
+            else
+                msMgr = FindObjectOfType<MainSceneManager>();
         }
         
         /// <summary>
@@ -91,6 +99,25 @@ namespace Nfynt.Components
             }
 
             AudioManager.Instance.PlayClip(AudioManager.ClipType.JIGSAW_CLIP, GetComponent<AudioSource>());
+
+            if(SolvedPieces()==9)
+            {
+                //doorController.OpenDoor();
+                msMgr.PuzzleSolved();
+                boardSolvedOnce = true;
+            }
+
+            if (boardSolvedOnce && SolvedPieces()==7 && !AnyslotFree())
+            {
+                msMgr.BreakTheWall();
+            }
+        }
+
+        bool AnyslotFree()
+        {
+            foreach (bool b in slotsFree)
+                if (b) return true;
+            return false;
         }
 
         public void ReleaseSlot(Collider col)
