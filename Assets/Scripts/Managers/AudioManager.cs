@@ -11,7 +11,15 @@ namespace Nfynt
         public enum ClipType
         {
             UI_BUTTON_CLICK,
-            TORCH_BUTTON_CLICK
+            TORCH_BUTTON_CLICK,
+            HEAVY_BUTTON_CLICK,
+            PS_LEVER_STATE,
+            JIGSAW_CLIP,
+            DIGILOCKKEY,
+            DIGILOCKOPEN,
+            KEYBOARDKEYPRESS,
+            LOGIN,
+            LOGINFAILED
         }
 
         [Header("Ambient Clips")]
@@ -23,6 +31,14 @@ namespace Nfynt
         [Header("SFX Clips")]
         public AudioClip clickClip;
         public AudioClip torchButtonClip;
+        public AudioClip heavyButtonClip;
+        public AudioClip powerSupplyLevelClip;
+        public AudioClip jigsawClip;
+        public AudioClip digiLockKeyPressClip;
+        public AudioClip digiLockOpenClip;
+        public AudioClip keyboardKeyPressClip;
+        public AudioClip loginClip;
+        public AudioClip loginFailedClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -67,6 +83,31 @@ namespace Nfynt
                     audioSrc.clip = clickClip;
                     break;
                 case ClipType.TORCH_BUTTON_CLICK:
+                    audioSrc.clip = torchButtonClip;
+                    break;
+                case ClipType.HEAVY_BUTTON_CLICK:
+                    audioSrc.clip = heavyButtonClip;
+                    break;
+                case ClipType.PS_LEVER_STATE:
+                    audioSrc.clip = powerSupplyLevelClip;
+                    break;
+                case ClipType.JIGSAW_CLIP:
+                    audioSrc.clip = jigsawClip;
+                    break;
+                case ClipType.DIGILOCKKEY:
+                    audioSrc.clip = digiLockKeyPressClip;
+                    break;
+                case ClipType.DIGILOCKOPEN:
+                    audioSrc.clip = digiLockOpenClip;
+                    break;
+                case ClipType.KEYBOARDKEYPRESS:
+                    audioSrc.clip = keyboardKeyPressClip;
+                    break;
+                case ClipType.LOGIN:
+                    audioSrc.clip = loginClip;
+                    break;
+                case ClipType.LOGINFAILED:
+                    audioSrc.clip = loginFailedClip;
                     break;
             }
             audSrc.Play();

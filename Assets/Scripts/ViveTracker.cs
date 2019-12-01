@@ -2,45 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
-using Nfynt;
 
 namespace Nfynt.Tracking
 {
     public class ViveTracker : Singleton<ViveTracker>
     {
-        public Transform trackedObj1;
-        public Transform trackedObj2;
-
-        InputDevice tracker;
-        InputDevice tracker2;
+        static List<InputDevice> devices = new List<InputDevice>();
 
         void Start()
         {
-            if (trackedObj1 == null)
-                return;
+            InputDevices.GetDevices(devices);
 
-            var allDevices = new List<InputDevice>();
-            InputDevices.GetDevices(allDevices);
-            tracker = allDevices.Find(d => d.role == InputDeviceRole.HardwareTracker);
-            tracker2 = allDevices.Find(d => d.role == InputDeviceRole.HardwareTracker && d != tracker);
+            foreach (var device in devices)
+            {
+                Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
+            }
         }
 
-        void Update()
+        public List<InputDevice> GetTrackedDevices(InputDeviceRole role)
         {
-            if (tracker != null)
-            {
-                tracker.TryGetFeatureValue(CommonUsages.devicePosition, out var pos);
-                trackedObj1.position = pos;
-                tracker.TryGetFeatureValue(CommonUsages.deviceRotation, out var rot);
-                trackedObj1.rotation = rot;
-            }
-            if (tracker2 != null)
-            {
-                tracker.TryGetFeatureValue(CommonUsages.devicePosition, out var pos);
-                trackedObj2.position = pos;
-                tracker.TryGetFeatureValue(CommonUsages.deviceRotation, out var rot);
-                trackedObj2.rotation = rot;
-            }
+            List<InputDevice> dev = new List<InputDevice>();
+            
+            foreach (InputDevice id in devices)
+                if (id.role == role)
+                    dev.Add(id);
+
+            return dev;
+        }
+
+        public void RefreshDeviceList()
+        {
+            InputDevices.GetDevices(devices);
+            //foreach (var device in devices)
+            //{
+            //    Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
+            //}
+        }
+
+        public InputDevice GetFirstDevice(InputDeviceRole role)
+        {
+            InputDevice dev = devices.Find(d => d.role == role);
+            return dev;
         }
     }
 }

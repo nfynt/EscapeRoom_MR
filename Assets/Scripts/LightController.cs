@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Nfynt.Components;
-using Nfynt.Behaviours;
 
 namespace Nfynt.Managers
 {
     public class LightController : MonoBehaviour
     {
-        public Light roomLight;
+        public List<Light> roomLight=new List<Light>();
         public ButtonSwitchBehaviour bsb;
 
         private void Start()
         {
-            roomLight.enabled = false;
+            ToggleLight(false);
         }
 
         private void OnEnable()
@@ -23,7 +22,8 @@ namespace Nfynt.Managers
 
         public void ToggleLight(bool isOn)
         {
-            roomLight.enabled = isOn;
+            foreach(Light ll in roomLight)
+            ll.enabled = isOn;
         }
 
         private void OnDisable()
