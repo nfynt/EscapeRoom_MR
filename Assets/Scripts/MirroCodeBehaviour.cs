@@ -40,7 +40,7 @@ namespace Nfynt.Tracking
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag=="Nail")
+            if(collision.gameObject.tag=="Nail" && ib!=null)
             {
                 ib.ReleaseFromGrasp();
                 ResetFrame();

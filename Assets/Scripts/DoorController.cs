@@ -52,7 +52,7 @@ namespace Nfynt.Components
 
         public void WallFaded()
         {
-            msMgr.GameFinished();
+            msMgr.BlockedWallDestroyed();
         }
     }
 }
