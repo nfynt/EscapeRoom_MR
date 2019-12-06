@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using Nfynt.Managers;
 
 namespace Nfynt.Components
 {
@@ -27,6 +28,7 @@ namespace Nfynt.Components
         public TMP_InputField passwordInput;
         public TextMeshProUGUI errorTxt;
         public AudioSource audSrc;
+        public int maxLength = 10;
 
         [SerializeField]
         private string userPassword = "1234";
@@ -34,6 +36,7 @@ namespace Nfynt.Components
         private State currState = State.OFF;
         private bool mainsOn;
         private AudioManager audMgr;
+        MainSceneManager msMgr;
 
         void Start()
         {
@@ -45,6 +48,10 @@ namespace Nfynt.Components
                 pb.AddDevice(this);
             }
             audMgr = AudioManager.Instance;
+            if (MainSceneManager.Instance != null)
+                msMgr = MainSceneManager.Instance;
+            else
+                msMgr = FindObjectOfType<MainSceneManager>();
         }
 
         public void KeyPressed(string key)
@@ -82,8 +89,13 @@ namespace Nfynt.Components
                     }
                     currPass = "";
                     break;
+                case "SPC":
+                    if (currPass.Length < maxLength)
+                        currPass += " ";
+                    break;
                 default:
-                    currPass += key;
+                    if (currPass.Length < maxLength)
+                        currPass += key;
                     break;
             }
             passwordInput.text = currPass;
@@ -116,6 +128,7 @@ namespace Nfynt.Components
                 case State.END:
                     loginScreen.SetActive(false);
                     loggedScreen.SetActive(true);
+                    msMgr.ComputerUnlocked();
                     break;
             }
             currState = newState;

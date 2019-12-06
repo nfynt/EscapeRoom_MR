@@ -85,7 +85,7 @@ namespace Nfynt.Components
 
             tTool.enabled = false;
             if (!skipAud)
-                audMgr.PlayClip(AudioManager.ClipType.PS_LEVER_STATE);
+                audMgr.PlayClip(AudioManager.ClipType.PS_LEVER_STATE,GetComponent<AudioSource>(),1f);
 
         }
 

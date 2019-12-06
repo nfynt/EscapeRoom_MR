@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Nfynt.Managers;
 
 namespace Nfynt.Components
 {
@@ -17,27 +18,41 @@ namespace Nfynt.Components
         /// <summary>
         /// Whether the slots are free
         /// </summary>
-        private List<bool> slotsFree;
+        public List<bool> slotsFree;
         /// <summary>
         /// Which slots have been solved
         /// </summary>
-        private List<bool> solved;
+        public List<bool> solved;
+
+        private bool boardSolvedOnce;
+        MainSceneManager msMgr;
 
         private void Start()
         {
             slots = new List<Collider>();
-            slotsFree = new List<bool>();
-            solved = new List<bool>();
+            //slotsFree = new List<bool>();
+            //solved = new List<bool>();
             foreach (Collider col in transform.GetComponentsInChildren<Collider>())
             {
                 slots.Add(col);
-                slotsFree.Add(true);
-                solved.Add(false);
+                //slotsFree.Add(true);
+                //solved.Add(false);
             }
-            
-            int ind = 0;
-            foreach (GameObject go in targetPieces)
-                go.GetComponent<JigsawPieceBehaviour>().boardPos = ind++;
+
+            //int ind = 0;
+            for (int i=0;i<slotsFree.Count;i++)
+            {
+                targetPieces[i].GetComponent<JigsawPieceBehaviour>().boardPos = i;
+                targetPieces[i].GetComponent<JigsawPieceBehaviour>().SetTargetCollider(slots[i]);
+
+                if (!slotsFree[i])
+                    targetPieces[i].GetComponent<JigsawPieceBehaviour>().connectedCollider = slots[i];
+            }
+            boardSolvedOnce = false;
+            if (MainSceneManager.Instance != null)
+                msMgr = MainSceneManager.Instance;
+            else
+                msMgr = FindObjectOfType<MainSceneManager>();
         }
         
         /// <summary>
@@ -50,7 +65,15 @@ namespace Nfynt.Components
             foreach (bool b in solved)
                 if (b) res++;
 
-            return res;
+            int cnt = 0;
+            foreach (GameObject GO in targetPieces)
+                if (GO.GetComponent<JigsawPieceBehaviour>().Solved())
+                    cnt++;
+
+            if (cnt != res)
+                Debug.LogWarning("Solved mismatched! col count:" + cnt.ToString() + "- bool count:" + res.ToString());
+
+            return cnt;
         }
 
         public bool IsSlotAvailable(Collider col)
@@ -58,7 +81,10 @@ namespace Nfynt.Components
             int ind = slots.IndexOf(col);
 
             if (ind < 0)
+            {
+                Debug.Log("Invalid collider passed from: " + col.gameObject.name);
                 return false;   //collider is not part of current board
+            }
 
             if (slotsFree[ind])
                 return true;
@@ -83,6 +109,37 @@ namespace Nfynt.Components
             }
 
             AudioManager.Instance.PlayClip(AudioManager.ClipType.JIGSAW_CLIP, GetComponent<AudioSource>());
+
+            if(SolvedPieces()==9)
+            {
+                //doorController.OpenDoor();
+                Debug.Log("Puzzle solved");
+                msMgr.PuzzleSolved();
+                boardSolvedOnce = true;
+            }
+            else
+            {
+                if (SolvedPieces() == 8 && !AnyslotFree())
+                {
+                    Debug.Log("Puzzle solved");
+                    msMgr.PuzzleSolved();
+                    boardSolvedOnce = true;
+                }
+                else
+                    Debug.Log("Remaining: " + (9 - SolvedPieces()).ToString());
+            }
+
+            if (boardSolvedOnce && SolvedPieces()==7 && !AnyslotFree())
+            {
+                msMgr.BreakTheWall();
+            }
+        }
+
+        bool AnyslotFree()
+        {
+            foreach (bool b in slotsFree)
+                if (b) return true;
+            return false;
         }
 
         public void ReleaseSlot(Collider col)

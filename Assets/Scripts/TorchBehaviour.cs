@@ -39,7 +39,6 @@ namespace Nfynt.Components
         [Tooltip("This color only applies if the object is an InteractionButton or InteractionSlider.")]
         public Color pressedColor = Color.white;
 
-
         private States currState;
         private States lastState;
         private bool readyToswitch;

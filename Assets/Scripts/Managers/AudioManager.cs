@@ -19,7 +19,9 @@ namespace Nfynt
             DIGILOCKOPEN,
             KEYBOARDKEYPRESS,
             LOGIN,
-            LOGINFAILED
+            LOGINFAILED,
+            DOOROPEN,
+            FADEWALL
         }
 
         [Header("Ambient Clips")]
@@ -39,6 +41,8 @@ namespace Nfynt
         public AudioClip keyboardKeyPressClip;
         public AudioClip loginClip;
         public AudioClip loginFailedClip;
+        public AudioClip doorOpenClip;
+        public AudioClip fadeWallClip;
 
         private AudioSource ambientAudSrc;
         private AudioSource audSrc;
@@ -77,6 +81,8 @@ namespace Nfynt
             if (audioSrc == null)
                 audioSrc = audSrc;
 
+            Debug.Log(audioSrc.gameObject.name + "- playing " + cType.ToString());
+
             switch (cType)
             {
                 case ClipType.UI_BUTTON_CLICK:
@@ -108,6 +114,12 @@ namespace Nfynt
                     break;
                 case ClipType.LOGINFAILED:
                     audioSrc.clip = loginFailedClip;
+                    break;
+                case ClipType.DOOROPEN:
+                    audioSrc.clip = doorOpenClip;
+                    break;
+                case ClipType.FADEWALL:
+                    audioSrc.clip = fadeWallClip;
                     break;
             }
             audSrc.Play();

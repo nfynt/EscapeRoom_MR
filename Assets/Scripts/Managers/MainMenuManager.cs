@@ -70,6 +70,7 @@ namespace Nfynt.Managers
         {
             GameSettings.isMusicOn = value;
             audMgr.SetAmbientAudioSrc(ambientAudio);
+            audMgr.PlayClip(AudioManager.ClipType.UI_BUTTON_CLICK);
         }
 
         void ToggleSFX(bool value)

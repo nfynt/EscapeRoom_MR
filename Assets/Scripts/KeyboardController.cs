@@ -10,31 +10,38 @@ namespace Nfynt.Components
     public class KeyboardController : MonoBehaviour
     {
         public ComputerController compController;
+        public float coolTime = 1f;
 
         private AudioManager audMgr;
+        private bool cooling = false;
 
         private void Start()
         {
             audMgr = AudioManager.Instance;
+            cooling = false;
         }
 
         private void OnEnable()
         {
             foreach(InteractionBehaviour ib in transform.GetComponentsInChildren<InteractionBehaviour>())
             {
-                ib.OnContactEnd += delegate { KeyReleased(ib.gameObject.name); };
-                ib.OnContactBegin += delegate { KeyPressed(); };
+                ib.OnContactEnd += delegate { KeyReleased(); };
+                ib.OnContactBegin += delegate { KeyPressed(ib.gameObject.name); };
             }
         }
 
-        public void KeyPressed()
+        public void KeyPressed(string key)
         {
+            if (cooling) return;
+
+            compController.KeyPressed(key);
             audMgr.PlayClip(AudioManager.ClipType.KEYBOARDKEYPRESS, compController.audSrc, 0.5f);
+            cooling = true;
+            Invoke("SetCoolingOff", 1.5f);
         }
 
-        public void KeyReleased(string key)
+        public void KeyReleased()
         {
-            compController.KeyPressed(key);
             audMgr.PlayClip(AudioManager.ClipType.KEYBOARDKEYPRESS, compController.audSrc, 0.5f);
         }
 
@@ -42,9 +49,16 @@ namespace Nfynt.Components
         {
             foreach (InteractionBehaviour ib in transform.GetComponentsInChildren<InteractionBehaviour>())
             {
-                ib.OnContactEnd -= delegate { KeyReleased(ib.gameObject.name); };
-                ib.OnContactBegin -= delegate { KeyPressed(); };
+                ib.OnContactEnd -= delegate { KeyReleased(); };
+                ib.OnContactBegin -= delegate { KeyPressed(ib.gameObject.name); };
             }
+
+            CancelInvoke();
+        }
+
+        void SetCoolingOff()
+        {
+            cooling = false;
         }
     }
 }

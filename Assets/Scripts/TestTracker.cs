@@ -29,7 +29,7 @@ namespace Nfynt.Tracking
                 tracker[ind].TryGetFeatureValue(CommonUsages.deviceRotation, out var rot);
                 stoolObj.rotation = rot;
 
-                Debug.Log(pos);
+                //Debug.Log(pos);
             }
             else
             {
