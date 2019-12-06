@@ -33,7 +33,7 @@ namespace Nfynt.Tracking
                 //float triggerVal=0f;
                 if (tracker[ind].TryGetFeatureValue(CommonUsages.primary2DAxisClick, out var touch) && touch)
                 {
-                    Debug.Log("Touch Pressed: " + touch.ToString());
+                    //Debug.Log("Touch Pressed: " + touch.ToString());
                     // Debug.Log("Trigger Pressed: "+triggerVal.ToString());
                     if (!pressedState)
                     {

@@ -43,6 +43,8 @@ namespace Nfynt.Components
             for (int i=0;i<slotsFree.Count;i++)
             {
                 targetPieces[i].GetComponent<JigsawPieceBehaviour>().boardPos = i;
+                targetPieces[i].GetComponent<JigsawPieceBehaviour>().SetTargetCollider(slots[i]);
+
                 if (!slotsFree[i])
                     targetPieces[i].GetComponent<JigsawPieceBehaviour>().connectedCollider = slots[i];
             }
@@ -63,7 +65,15 @@ namespace Nfynt.Components
             foreach (bool b in solved)
                 if (b) res++;
 
-            return res;
+            int cnt = 0;
+            foreach (GameObject GO in targetPieces)
+                if (GO.GetComponent<JigsawPieceBehaviour>().Solved())
+                    cnt++;
+
+            if (cnt != res)
+                Debug.LogWarning("Solved mismatched! col count:" + cnt.ToString() + "- bool count:" + res.ToString());
+
+            return cnt;
         }
 
         public bool IsSlotAvailable(Collider col)
@@ -103,8 +113,20 @@ namespace Nfynt.Components
             if(SolvedPieces()==9)
             {
                 //doorController.OpenDoor();
+                Debug.Log("Puzzle solved");
                 msMgr.PuzzleSolved();
                 boardSolvedOnce = true;
+            }
+            else
+            {
+                if (SolvedPieces() == 8 && !AnyslotFree())
+                {
+                    Debug.Log("Puzzle solved");
+                    msMgr.PuzzleSolved();
+                    boardSolvedOnce = true;
+                }
+                else
+                    Debug.Log("Remaining: " + (9 - SolvedPieces()).ToString());
             }
 
             if (boardSolvedOnce && SolvedPieces()==7 && !AnyslotFree())

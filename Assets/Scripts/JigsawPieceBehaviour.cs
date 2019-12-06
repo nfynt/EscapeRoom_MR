@@ -13,6 +13,7 @@ namespace Nfynt.Components {
         private JigsawBoardController jbController;
         public int boardPos = 1;
         public Collider connectedCollider;
+        private Collider targetColider;
 
         private void Start()
         {
@@ -27,11 +28,25 @@ namespace Nfynt.Components {
             rBody.isKinematic = false;
             if (connectedCollider != null)
                 jbController.ReleaseSlot(connectedCollider);
+            connectedCollider = null;
         }
 
         public void GraspReleased()
         {
             rBody.isKinematic = false;
+        }
+
+        public void SetTargetCollider(Collider co)
+        {
+            this.targetColider = co;
+        }
+
+        public bool Solved()
+        {
+            if (connectedCollider!=null && connectedCollider == targetColider)
+                return true;
+
+            return false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -40,8 +55,8 @@ namespace Nfynt.Components {
             {
                 intObj.ReleaseFromGrasp();
                 SnapOnBoard(other.transform);
-                jbController.SlotUsed(other, boardPos);
                 connectedCollider = other;
+                jbController.SlotUsed(other, boardPos);
             }
         }
 

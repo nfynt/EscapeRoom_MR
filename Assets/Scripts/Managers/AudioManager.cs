@@ -81,6 +81,8 @@ namespace Nfynt
             if (audioSrc == null)
                 audioSrc = audSrc;
 
+            Debug.Log(audioSrc.gameObject.name + "- playing " + cType.ToString());
+
             switch (cType)
             {
                 case ClipType.UI_BUTTON_CLICK:
