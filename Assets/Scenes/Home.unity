@@ -877,8 +877,8 @@ RectTransform:
   m_Father: {fileID: 1347799100}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.8237037}
-  m_AnchorMax: {x: 1, y: 0.9233333}
+  m_AnchorMin: {x: 0, y: 0.8737037}
+  m_AnchorMax: {x: 1, y: 0.9733333}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1219,8 +1219,8 @@ RectTransform:
   m_Father: {fileID: 1347799100}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15854166, y: -0.0000046089845}
-  m_AnchorMax: {x: 0.83739585, y: 0.7361527}
+  m_AnchorMin: {x: 0.15854166, y: -0.000050441864}
+  m_AnchorMax: {x: 0.83739585, y: 0.82152814}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1255,27 +1255,38 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<b>Team</b>
+  m_Text: '<b>Programming and development</b>
 
-    <i>Shubham
+    <i>Shubham Singh
 
-    Bill
+    Zengou Ma
 
-    Jas
+    Jaspreet Dhanjan
 
-    Shanshan</i>
-
-
-
-    <b>Supervisor</b>
-
-    <i>Anthony Steed</i>
+    Shanshan Li</i>
 
 
+    <b>UI and Art works</b>
 
-    <b>Resources</b>
+    <i>https://opengameart.org/
 
-    <i>Google</i>'
+    Starry Night: Vincent Van Gogh (wikipedia)</i>
+
+
+    <b>3D models and assets</b>
+
+    <i> Breakable windows by SAIK Software; Assetstore
+
+    Flashlight by RRFreelance; Assetstore
+
+    Snaps prototype|Office; Asserstore</i>
+
+
+    <b>Audio</b>
+
+    <i>freesoundeffects.com
+
+    zapsplat.com</i>'
 --- !u!222 &1003373891
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1707,23 +1718,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acf1e5db3c8def4fbba52105dea9f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homeClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
-  mainClip: {fileID: 8300000, guid: 86174e18536b06b40a1b47ab0d73dd40, type: 3}
+  homeClip: {fileID: 8300000, guid: 7943632a68b1125479ea7373169e740e, type: 3}
+  mainClip: {fileID: 8300000, guid: 7943632a68b1125479ea7373169e740e, type: 3}
   clickClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
   torchButtonClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
   heavyButtonClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291, type: 3}
   powerSupplyLevelClip: {fileID: 8300000, guid: b981aa5094698aa428f843f2603c2291,
     type: 3}
-  jigsawClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
-  digiLockKeyPressClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be,
+  jigsawClip: {fileID: 8300000, guid: d0303ccb4334e9c4286811a9390b173e, type: 3}
+  digiLockKeyPressClip: {fileID: 8300000, guid: 11d923cb8d642fc47a31940a50897024,
     type: 3}
-  digiLockOpenClip: {fileID: 8300000, guid: 70f3424ee802027458261da5584764be, type: 3}
+  digiLockOpenClip: {fileID: 8300000, guid: 845c0747a643a4745ab4d80ba523e9da, type: 3}
   keyboardKeyPressClip: {fileID: 8300000, guid: 48497e8cc59ce4de88cae5790d465014,
     type: 3}
-  loginClip: {fileID: 8300000, guid: 6a0aa7742137b4b13af8347cb830a4a7, type: 3}
-  loginFailedClip: {fileID: 8300000, guid: 52189df4c43094e1d9fd9cd8eae940c1, type: 3}
+  loginClip: {fileID: 8300000, guid: 3d045d9025630ca47a39559b2ca501ba, type: 3}
+  loginFailedClip: {fileID: 8300000, guid: 510ec6f760c0baa41bd84e0ae9a45966, type: 3}
   doorOpenClip: {fileID: 8300000, guid: 1c57bc4aa830d47fc950217d167f2e12, type: 3}
-  fadeWallClip: {fileID: 8300000, guid: 1c57bc4aa830d47fc950217d167f2e12, type: 3}
+  fadeWallClip: {fileID: 8300000, guid: f18773078fb38b14ab6a6342105f95e4, type: 3}
 --- !u!1 &1311513746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,8 +2727,8 @@ RectTransform:
   m_Father: {fileID: 1347799100}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.23958333, y: 0.787963}
-  m_AnchorMax: {x: 0.7604167, y: 0.7953704}
+  m_AnchorMin: {x: 0.23958333, y: 0.8518518}
+  m_AnchorMax: {x: 0.7604167, y: 0.85925925}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
