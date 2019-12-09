@@ -4,46 +4,45 @@ using UnityEngine;
 using Nfynt.Components;
 
 namespace Nfynt.Utility {
-    public class BlockedWall : MonoBehaviour
-    {
-        public Vector2 moveSpeed;
-        public DoorController door;
-        Vector2 Offset = new Vector2(0f, 0f);
-        Color col;
-        Renderer rend;
-        bool fading;
+	public class BlockedWall : MonoBehaviour
+	{
+		public Vector2 moveSpeed;
+		public DoorController door;
+		Vector2 Offset = new Vector2(0f, 0f);
+		//Color col;
+		Renderer rend;
+		bool fading;
 
-        private void OnEnable()
-        {
-            rend = GetComponent<MeshRenderer>();
-        }
+		private void OnEnable()
+		{
+			rend = GetComponent<MeshRenderer>();
+		}
 
-        private void LateUpdate()
-        {
-            if (fading)
-            {
-                col = new Color(col.r, col.g, col.b, col.a - 0.1f);
-            }
-            else
-            {
-                Offset += moveSpeed * Time.deltaTime;
-                rend.material.SetTextureOffset("_MainTex", Offset);
-            }
-        }
+		private void LateUpdate()
+		{
+			if (!fading)
+			{
+				Offset += moveSpeed * Time.deltaTime;
+				rend.material.SetTextureOffset("_MainTex", Offset);
+			}
+		}
 
-        public void FadeWall()
-        {
-            fading = true;
-            StartCoroutine(Fade());
-        }
+		/// <summary>
+		/// Fade wall in secs
+		/// </summary>
+		/// <param name="dur"></param>
+		public void FadeWall(float dur=3f)
+		{
+			fading = true;
+			StartCoroutine(Fade(dur));
+		}
 
-        IEnumerator Fade()
-        {
-            col = rend.material.color;
-            yield return new WaitUntil(() => col.a < 0.1f);
-            door.WallFaded();
-        }
-    }
+		IEnumerator Fade(float dur=3f)
+		{
+			yield return new WaitForSeconds(dur);
+			door.WallFaded();
+		}
+	}
 }
 
 
